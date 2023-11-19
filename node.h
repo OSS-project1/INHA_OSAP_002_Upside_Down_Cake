@@ -21,44 +21,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "node.h"
-#include <iostream>
-#ifndef AVLTREE_H
-#define AVLTREE_H
-
-// Define Set
-class AVLTree : public Node {
-protected:
-  // AVLTree constructor
-  AVLTree();
-  // insert a node
-  Node *insert_Node(Node *cur_node, int key);
-  // Find node matcheds a key
-  Node *find_Node(int key);
-  // Get Rank by a given node
-  int find_Rank(Node *cur_node);
-  // Erase a node matches a given key
-  Node *erase(Node *cur_node, int key);
-  // Single righr rotation
-  Node *single_right_rotation(Node *cur_node);
-  // double right rotation
-  Node *double_right_rotation(Node *cur_node);
-  // single left rotation
-  Node *single_left_rotation(Node *cur_node);
-  // double left rotation
-  Node *double_left_rotation(Node *cur_node);
-  // set height of a given node
-  void set_height(Node *cur);
-  // get height of a given node
-  int get_height(Node *cur);
-  // set dpeth of a given node
-  void set_depth(Node *cur);
-  // get depth of a given node
-  int get_depth(Node *cur);
-
+#ifndef NODE_H
+#define NODE_H
+// define Node
+class Node {
 protected:
   // members
-  Node *root_;
-  size_t num_of_nodes_;
+  int key_;
+  Node *left_;
+  Node *right_;
+  int height_;
+  int depth_;
+
+  // Node constructors
+  Node();
+  Node(int key);
 };
 #endif

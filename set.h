@@ -25,7 +25,7 @@ SOFTWARE.
 #ifndef SET_H
 #define SET_H
 
-// Define Set
+// define Set
 class Set {
 public:
   // Set constructor
