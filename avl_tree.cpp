@@ -29,8 +29,8 @@ AVLTree::AVLTree() {
   num_of_nodes_ = 0;
 }
 
-/* single left rotation when cur_node has left child and left granchild */
-Node *AVLTree::single_left_rotation(Node *cur_node) {
+/* single right rotation when cur_node has left child and left granchild */
+Node *AVLTree::single_right_rotation(Node *cur_node) {
   Node *left_child = cur_node->left_;
   cur_node->left_ = left_child->right_;
   left_child->right_ = cur_node;
@@ -39,12 +39,23 @@ Node *AVLTree::single_left_rotation(Node *cur_node) {
   return left_child;
 }
 
+/* single left rotation when cur_node has right child and right granchild */
+Node *AVLTree::single_left_rotation(Node *cur_node) {
+  Node* right_child = cur_node->right_;
+  cur_node->right_ = right_child->left_;
+  right_child->left_ = cur_node;
+  set_height(cur_node, 3);
+  set_height(right_child, 2);
+  return right_child;
+}
+
+
 /*
 set_hegiht based on calling node's childs
 children argument
   3: when calling node has two childs
-  2: when calling node has only left child
-  1: when calling node has only right child
+  2: when calling node has only right child
+  1: when calling node has only left child
 */
 void AVLTree::set_height(Node *cur_node, int chidren) {
   switch (chidren) {
