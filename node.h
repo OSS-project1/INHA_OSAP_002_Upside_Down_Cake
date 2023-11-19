@@ -25,7 +25,9 @@ SOFTWARE.
 #define NODE_H
 // define Node
 class Node {
-protected:
+  friend class AVLTree;
+
+private:
   // members
   int key_;
   Node *left_;
@@ -35,6 +37,18 @@ protected:
 
   // Node constructors
   Node();
-  Node(int key);
+  Node(int);
+  // get key member
+  int get_key();
+   // set key member
+  void set_key(int);
+  // get height member
+  int get_height();
+  // set height member
+  void set_height(int);
+  // get depth member
+  int get_depth();
+   // set depth member
+  void set_depth(int);
 };
 #endif

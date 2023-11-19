@@ -27,34 +27,34 @@ SOFTWARE.
 #define AVLTREE_H
 
 // Define Set
-class AVLTree : public Node {
+class AVLTree {
 protected:
   // AVLTree constructor
   AVLTree();
   // insert a node
-  Node *insert_Node(Node *cur_node, int key);
+  Node *insert_node(Node *, int);
   // Find node matcheds a key
-  Node *find_Node(int key);
+  Node *find_node(int);
   // Get Rank by a given node
-  int find_Rank(Node *cur_node);
+  int find_rank(Node *);
   // Erase a node matches a given key
-  Node *erase(Node *cur_node, int key);
+  Node *erase(Node *, int);
   // Single righr rotation
-  Node *single_right_rotation(Node *cur_node);
+  Node *single_right_rotation(Node *);
   // double right rotation
-  Node *double_right_rotation(Node *cur_node);
+  Node *double_right_rotation(Node *);
   // single left rotation
-  Node *single_left_rotation(Node *cur_node);
+  Node *single_left_rotation(Node *);
   // double left rotation
-  Node *double_left_rotation(Node *cur_node);
+  Node *double_left_rotation(Node *);
   // set height of a given node
-  void set_height(Node *cur);
+  void set_height(Node *, int);
   // get height of a given node
-  int get_height(Node *cur);
+  int get_height(Node *);
   // set dpeth of a given node
-  void set_depth(Node *cur);
+  void set_depth(Node *);
   // get depth of a given node
-  int get_depth(Node *cur);
+  int get_depth(Node *);
 
 protected:
   // members
