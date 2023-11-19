@@ -26,25 +26,27 @@ SOFTWARE.
 #define SET_H
 
 // Define Set
-class Set { 
+class Set {
 public:
-	// Set constructor
-	Set();
-	// insert a node has a given key
-	int insert(int key);
-	// erase a node has a given key
-	int erase(int key); 
-	// find depth of a node has a given key
-	int find(int key); 
-	// get a rank of a node has a given key
-	int get_rank(int key); 
-	// get a node which has a minimum key of subtree where its root has a given key
-	int get_min_key(int key); 
-	// get a node which has a maximum key of subtree wh`ere its root has a given key
-	int get_max_key(int key); 
-	// get a size of a whole avl tree
-	int get_size(); 
-	// return whether avl tree is emptry or not
-	bool is_empty(); 
+  // Set constructor
+  Set();
+  // insert a node has a given key
+  int insert(int key);
+  // erase a node has a given key
+  int erase(int key);
+  // find depth of a node has a given key
+  int find(int key);
+  // get a rank of a node has a given key
+  int get_rank(int key);
+  // get a node which has a minimum key of subtree where its root has a given
+  // key
+  int get_min_key(int key);
+  // get a node which has a maximum key of subtree wh`ere its root has a given
+  // key
+  int get_max_key(int key);
+  // get a size of a whole avl tree
+  int get_size();
+  // return whether avl tree is emptry or not
+  bool is_empty();
 };
 #endif
