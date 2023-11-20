@@ -1,5 +1,5 @@
 /*
-File: avl_tree.h
+File: avl_tree.cpp
 Copyright (c) 2023 김기정
 
 MIT License
@@ -29,7 +29,9 @@ AVLTree::AVLTree() {
   num_of_nodes_ = 0;
 }
 
-/* single right rotation when cur_node has left child and left granchild */
+/* root - left - left */
+/* when cur_node's left child has bigger height than right child's height and
+ * newly insterted node has smaller key than left child's one */
 Node *AVLTree::single_right_rotation(Node *cur_node) {
   Node *left_child = cur_node->left_;
   cur_node->left_ = left_child->right_;
@@ -39,7 +41,9 @@ Node *AVLTree::single_right_rotation(Node *cur_node) {
   return left_child;
 }
 
-/* single left rotation when cur_node has right child and right granchild */
+/* root - right - right */
+/* when cur_node's right child has bigger height than left child's height and
+ * newly insterted node has bigger key than right child's one */
 Node *AVLTree::single_left_rotation(Node *cur_node) {
   Node* right_child = cur_node->right_;
   cur_node->right_ = right_child->left_;
@@ -47,6 +51,15 @@ Node *AVLTree::single_left_rotation(Node *cur_node) {
   set_height(cur_node, 3);
   set_height(right_child, 2);
   return right_child;
+}
+
+/* root - left - right */
+/* when cur_node's left child has bigger height than right child's height and
+ * newly inserted node has bigger key than left child's one */
+Node *AVLTree::double_right_rotation(Node *cur_node) {
+  cur_node->left_ = single_left_rotation(cur_node->left_);
+  cur_node = single_right_rotation(cur_node);
+  return cur_node;
 }
 
 
@@ -78,6 +91,7 @@ void AVLTree::set_height(Node *cur_node, int chidren) {
   }
 }
 
+/* returns -1 if cur_node is NULL, else height member */
 int AVLTree::get_height(Node *cur_node) {
   if (cur_node == NULL)
     return -1;
