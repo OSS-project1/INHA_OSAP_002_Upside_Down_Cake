@@ -34,7 +34,7 @@ protected:
   // insert a node
   Node *insert_node(Node *, int);
   // Find node matcheds a key
-  Node *find_node(int);
+  Node *find_node(Node *, int);
   // Get Rank by a given node
   int find_rank(Node *);
   // Erase a node matches a given key

@@ -26,6 +26,7 @@ SOFTWARE.
 // define Node
 class Node {
   friend class AVLTree;
+  friend class Set;
 
 private:
   // members
@@ -33,22 +34,17 @@ private:
   Node *left_;
   Node *right_;
   int height_;
-  int depth_;
 
   // Node constructors
   Node();
   Node(int);
   // get key member
   int get_key();
-   // set key member
+  // set key member
   void set_key(int);
   // get height member
   int get_height();
   // set height member
   void set_height(int);
-  // get depth member
-  int get_depth();
-   // set depth member
-  void set_depth(int);
 };
 #endif
