@@ -1,5 +1,5 @@
 /*
-File: avl_tree.h
+File: node.cpp
 Copyright (c) 2023 김기정
 
 MIT License
@@ -20,37 +20,24 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 #include "node.h"
 #include <iostream>
-#ifndef AVLTREE_H
-#define AVLTREE_H
 
-// Define AVLTree
-class AVLTree {
-protected:
-  // AVLTree constructor
-  AVLTree();
-  // insert a node
-  Node *insert_node(Node *, int);
-  // Single righr rotation
-  Node *single_right_rotation(Node *);
-  // double right rotation
-  Node *double_right_rotation(Node *);
-  // single left rotation
-  Node *single_left_rotation(Node *);
-  // double left rotation
-  Node *double_left_rotation(Node *);
-  // set height of a given node
-  void set_height(Node *, int);
-  // get height of a given node
-  int get_height(Node *);
-  // check if AVL tree is balanced
-  bool is_balanced(Node *, Node *);
+/* Node constructors */
+Node::Node() {
+  key_ = -1;
+  left_ = right_ = NULL;
+  height_ = 0;
+}
+Node::Node(int key) {
+  key_ = key;
+  left_ = right_ = NULL;
+  height_ = 0;
+}
 
-protected:
-  // members
-  Node *root_;
-  size_t num_of_nodes_;
-};
-#endif
+/* setters & getters */
+void Node::set_key(int key) { this->key_ = key; }
+int Node::get_key() { return key_; }
+
+void Node::set_height(int height) { this->height_ = height; }
+int Node::get_height() { return height_; }

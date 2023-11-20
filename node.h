@@ -1,5 +1,5 @@
 /*
-File: avl_tree.h
+File: node.h
 Copyright (c) 2023 김기정
 
 MIT License
@@ -21,36 +21,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "node.h"
-#include <iostream>
-#ifndef AVLTREE_H
-#define AVLTREE_H
+#ifndef NODE_H
+#define NODE_H
+// define Node
+class Node {
+  friend class AVLTree;
+  friend class Set;
 
-// Define AVLTree
-class AVLTree {
-protected:
-  // AVLTree constructor
-  AVLTree();
-  // insert a node
-  Node *insert_node(Node *, int);
-  // Single righr rotation
-  Node *single_right_rotation(Node *);
-  // double right rotation
-  Node *double_right_rotation(Node *);
-  // single left rotation
-  Node *single_left_rotation(Node *);
-  // double left rotation
-  Node *double_left_rotation(Node *);
-  // set height of a given node
-  void set_height(Node *, int);
-  // get height of a given node
-  int get_height(Node *);
-  // check if AVL tree is balanced
-  bool is_balanced(Node *, Node *);
-
-protected:
+private:
   // members
-  Node *root_;
-  size_t num_of_nodes_;
+  int key_;
+  Node *left_;
+  Node *right_;
+  int height_;
+
+  // Node constructors
+  Node();
+  Node(int);
+  // get key member
+  int get_key();
+  // set key member
+  void set_key(int);
+  // get height member
+  int get_height();
+  // set height member
+  void set_height(int);
 };
 #endif

@@ -1,5 +1,5 @@
 /*
-File: avl_tree.h
+File: set.cpp
 Copyright (c) 2023 김기정
 
 MIT License
@@ -20,37 +20,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+#include "set.h"
 
-#include "node.h"
-#include <iostream>
-#ifndef AVLTREE_H
-#define AVLTREE_H
+ void Set::insert(int key){
+    Node* inserted_node = insert_node(root_, key);
+    //std::cout << find_depth(root_, key, 0) << '\n';
+ }
 
-// Define AVLTree
-class AVLTree {
-protected:
-  // AVLTree constructor
-  AVLTree();
-  // insert a node
-  Node *insert_node(Node *, int);
-  // Single righr rotation
-  Node *single_right_rotation(Node *);
-  // double right rotation
-  Node *double_right_rotation(Node *);
-  // single left rotation
-  Node *single_left_rotation(Node *);
-  // double left rotation
-  Node *double_left_rotation(Node *);
-  // set height of a given node
-  void set_height(Node *, int);
-  // get height of a given node
-  int get_height(Node *);
-  // check if AVL tree is balanced
-  bool is_balanced(Node *, Node *);
-
-protected:
-  // members
-  Node *root_;
-  size_t num_of_nodes_;
-};
-#endif
