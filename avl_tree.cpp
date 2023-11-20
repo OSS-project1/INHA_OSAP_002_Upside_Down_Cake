@@ -71,12 +71,17 @@ Node *AVLTree::double_left_rotation(Node *cur_node) {
   return cur_node;
 }
 
+/* difference between heights have to be less than 2 to be balanced. */
+bool AVLTree::is_balanced(Node *child_1, Node *child_2) {
+  return (get_height(child_1) - get_height(child_2) < 2);
+}
+
 /*
 set_hegiht based on calling node's childs
 children argument
-  3: when calling node has two childs
-  2: when calling node has only right child
-  1: when calling node has only left child
+  3: compare two children
+  2: compare right child to calling node's height
+  1: compare left child to calling node's height 
 */
 void AVLTree::set_height(Node *cur_node, int chidren) {
   switch (chidren) {

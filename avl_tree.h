@@ -55,6 +55,8 @@ protected:
   void set_depth(Node *);
   // get depth of a given node
   int get_depth(Node *);
+  // check if AVL tree is balanced
+  bool is_balanced(Node *, Node *);
 
 protected:
   // members
