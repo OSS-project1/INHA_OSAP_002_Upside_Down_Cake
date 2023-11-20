@@ -62,6 +62,14 @@ Node *AVLTree::double_right_rotation(Node *cur_node) {
   return cur_node;
 }
 
+/* root- right - left */
+/* when cur_node's left child has bigger height than right child's height and
+ * newly inserted node has bigger key than left child's one */
+Node *AVLTree::double_left_rotation(Node *cur_node) {
+  cur_node->right_ = single_right_rotation(cur_node->right_);
+  cur_node = single_left_rotation(cur_node);
+  return cur_node;
+}
 
 /*
 set_hegiht based on calling node's childs
