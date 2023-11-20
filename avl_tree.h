@@ -33,12 +33,6 @@ protected:
   AVLTree();
   // insert a node
   Node *insert_node(Node *, int);
-  // Find node matcheds a key
-  Node *find_node(Node *, int);
-  // Get Rank by a given node
-  int find_rank(Node *);
-  // Erase a node matches a given key
-  Node *erase(Node *, int);
   // Single righr rotation
   Node *single_right_rotation(Node *);
   // double right rotation
@@ -51,8 +45,6 @@ protected:
   void set_height(Node *, int);
   // get height of a given node
   int get_height(Node *);
-  // get depth of a given node
-  int find_depth(Node *, int, int);
   // check if AVL tree is balanced
   bool is_balanced(Node *, Node *);
 

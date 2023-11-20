@@ -39,22 +39,24 @@ Node *AVLTree::insert_node(Node *cur_node, int key) {
   else if (cur_node->key_ > key) {
     cur_node->left_ = insert_node(cur_node->left_, key);
     /* balancing */
-    if (is_balanced(cur_node->left_, cur_node->right_)) {
-      cur_node = single_right_rotation(cur_node);
-    } else {
-      cur_node = double_right_rotation(cur_node);
+    if (!is_balanced(cur_node->left_, cur_node->right_)) {
+      if (cur_node->left_->key_ > key) {
+        //cur_node = single_right_rotation(cur_node);
+      } else {
+        //cur_node = double_right_rotation(cur_node);
+      }
     }
-
   }
 
   /* if new key is bigger than current node's key, become a right child */
   else {
     cur_node->right_ = insert_node(cur_node->right_, key);
-    /* balancing */
-    if (is_balanced(cur_node->right_, cur_node->left_)) {
-      cur_node = single_left_rotation(cur_node);
-    } else {
-      cur_node = double_left_rotation(cur_node);
+    if (!is_balanced(cur_node->right_, cur_node->left_)) {
+      if (cur_node->right_->key_ < key) {
+        //cur_node = single_left_rotation(cur_node);
+      } else {
+        //cur_node = double_left_rotation(cur_node);
+      }
     }
   }
 
