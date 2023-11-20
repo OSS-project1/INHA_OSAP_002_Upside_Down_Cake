@@ -27,12 +27,12 @@ SOFTWARE.
 Node::Node() {
   key_ = -1;
   left_ = right_ = NULL;
-  height_ = depth_ = 0;
+  height_ = 0;
 }
 Node::Node(int key) {
   key_ = key;
   left_ = right_ = NULL;
-  height_ = depth_ = 0;
+  height_ = 0;
 }
 
 /* setters & getters */
@@ -41,6 +41,3 @@ int Node::get_key() { return key_; }
 
 void Node::set_height(int height) { this->height_ = height; }
 int Node::get_height() { return height_; }
-
-void Node::set_depth(int depth) { this->depth_ = depth; }
-int Node::get_depth() { return depth_; }

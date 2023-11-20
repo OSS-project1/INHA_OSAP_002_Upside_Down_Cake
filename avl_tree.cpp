@@ -111,3 +111,15 @@ int AVLTree::get_height(Node *cur_node) {
   else
     return cur_node->get_height();
 }
+
+/* check if there is a node storing a given key */
+Node *AVLTree::find_node(Node *cur_node, int key) {
+  if (cur_node == NULL)
+    return NULL;
+  else if (cur_node->key_ == key)
+    return cur_node;
+  else if (cur_node->key_ > key)
+    return find_node(cur_node->left_, key);
+  else if (cur_node->key_ < key)
+    return find_node(cur_node->right_, key);
+}

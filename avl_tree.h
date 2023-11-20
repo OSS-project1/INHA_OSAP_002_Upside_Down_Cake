@@ -26,7 +26,7 @@ SOFTWARE.
 #ifndef AVLTREE_H
 #define AVLTREE_H
 
-// Define Set
+// Define AVLTree
 class AVLTree {
 protected:
   // AVLTree constructor
@@ -51,10 +51,8 @@ protected:
   void set_height(Node *, int);
   // get height of a given node
   int get_height(Node *);
-  // set dpeth of a given node
-  void set_depth(Node *);
   // get depth of a given node
-  int get_depth(Node *);
+  int find_depth(Node *, int, int);
   // check if AVL tree is balanced
   bool is_balanced(Node *, Node *);
 
