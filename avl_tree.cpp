@@ -78,3 +78,9 @@ void AVLTree::set_height(Node *cur_node, int chidren) {
   }
 }
 
+int AVLTree::get_height(Node *cur_node) {
+  if (cur_node == NULL)
+    return -1;
+  else
+    return cur_node->get_height();
+}

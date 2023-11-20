@@ -1,5 +1,5 @@
 /*
-File: avl_tree.h
+File: node.cpp
 Copyright (c) 2023 김기정
 
 MIT License
@@ -27,12 +27,12 @@ SOFTWARE.
 Node::Node() {
   key_ = -1;
   left_ = right_ = NULL;
-  height_ = depth_ = -1;
+  height_ = depth_ = 0;
 }
 Node::Node(int key) {
   key_ = key;
   left_ = right_ = NULL;
-  height_ = depth_ = -1;
+  height_ = depth_ = 0;
 }
 
 /* setters & getters */
