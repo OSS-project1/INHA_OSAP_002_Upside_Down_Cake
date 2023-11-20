@@ -45,7 +45,7 @@ Node *AVLTree::single_right_rotation(Node *cur_node) {
 /* when cur_node's right child has bigger height than left child's height and
  * newly insterted node has bigger key than right child's one */
 Node *AVLTree::single_left_rotation(Node *cur_node) {
-  Node* right_child = cur_node->right_;
+  Node *right_child = cur_node->right_;
   cur_node->right_ = right_child->left_;
   right_child->left_ = cur_node;
   set_height(cur_node, 3);
@@ -81,7 +81,7 @@ set_hegiht based on calling node's childs
 children argument
   3: compare two children
   2: compare right child to calling node's height
-  1: compare left child to calling node's height 
+  1: compare left child to calling node's height
 */
 void AVLTree::set_height(Node *cur_node, int chidren) {
   switch (chidren) {
@@ -122,4 +122,15 @@ Node *AVLTree::find_node(Node *cur_node, int key) {
     return find_node(cur_node->left_, key);
   else if (cur_node->key_ < key)
     return find_node(cur_node->right_, key);
+}
+
+int AVLTree::find_depth(Node *cur_node, int key, int depth) {
+  if (cur_node == NULL)
+    return 0;
+  else if (cur_node->key_ == key)
+    return depth;
+  else if (cur_node->key_ > key)
+    return find_depth(cur_node->left_, key, depth + 1);
+  else if (cur_node->key_ < key)
+    return find_depth(cur_node->right_, key, depth + 1);
 }
