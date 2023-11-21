@@ -41,6 +41,18 @@ Node *AVLTree::single_right_rotation(Node *cur_node) {
   return left_child;
 }
 
+/* root - right - right */
+/* when cur_node's right child has bigger height than left child's height and
+ * newly insterted node has bigger key than right child's one */
+Node *AVLTree::single_left_rotation(Node *cur_node) {
+  Node *right_child = cur_node->right_;
+  cur_node->right_ = right_child->left_;
+  right_child->left_ = cur_node;
+  set_height(cur_node, 3);
+  set_height(right_child, 2);
+  return right_child;
+}
+
 /* difference between heights have to be less than 2 to be balanced. */
 bool AVLTree::is_balanced(Node *child_1, Node *child_2) {
   return (get_height(child_1) - get_height(child_2) < 2);
@@ -80,4 +92,15 @@ int AVLTree::get_height(Node *cur_node) {
     return -1;
   else
     return cur_node->get_height();
+}
+
+Node *AVLTree::find_node(Node *cur_node, int key) {
+  if (cur_node == NULL)
+    return NULL;
+  else if (cur_node->key_ == key)
+    return cur_node;
+  else if (cur_node->key_ > key)
+    return find_node(cur_node->left_, key);
+  else if (cur_node->key_ < key)
+    return find_node(cur_node->right_, key);
 }
