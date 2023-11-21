@@ -53,6 +53,15 @@ Node *AVLTree::single_left_rotation(Node *cur_node) {
   return right_child;
 }
 
+/* root - left - right */
+/* when cur_node's left child has bigger height than right child's height and
+ * newly inserted node has bigger key than left child's one */
+Node *AVLTree::double_right_rotation(Node *cur_node) {
+  cur_node->left_ = single_left_rotation(cur_node->left_);
+  cur_node = single_right_rotation(cur_node);
+  return cur_node;
+}
+
 /* difference between heights have to be less than 2 to be balanced. */
 bool AVLTree::is_balanced(Node *child_1, Node *child_2) {
   return (get_height(child_1) - get_height(child_2) < 2);

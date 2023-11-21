@@ -43,7 +43,7 @@ Node *AVLTree::insert_node(Node *cur_node, int key) {
       if (cur_node->left_->key_ > key) {
         cur_node = single_right_rotation(cur_node);
       } else {
-        //cur_node = double_right_rotation(cur_node);
+        cur_node = double_right_rotation(cur_node);
       }
     }
   }
