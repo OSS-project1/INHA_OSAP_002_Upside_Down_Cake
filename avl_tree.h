@@ -33,6 +33,8 @@ protected:
   AVLTree();
   // insert a node
   Node *insert_node(Node *, int);
+  // Find node matcheds a key
+  Node *find_node(Node *, int);
   // Single righr rotation
   Node *single_right_rotation(Node *);
   // double right rotation

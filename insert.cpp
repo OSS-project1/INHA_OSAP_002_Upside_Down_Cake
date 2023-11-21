@@ -51,6 +51,7 @@ Node *AVLTree::insert_node(Node *cur_node, int key) {
   /* if new key is bigger than current node's key, become a right child */
   else {
     cur_node->right_ = insert_node(cur_node->right_, key);
+    /* balancing */
     if (!is_balanced(cur_node->right_, cur_node->left_)) {
       if (cur_node->right_->key_ < key) {
         cur_node = single_left_rotation(cur_node);
