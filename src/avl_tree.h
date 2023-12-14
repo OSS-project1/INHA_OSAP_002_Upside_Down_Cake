@@ -1,6 +1,6 @@
 /*
 File: avl_tree.h
-Copyright (c) 2023 김기정, 변해광
+Copyright (c) 2023 김기정
 
 MIT License
 
@@ -26,46 +26,50 @@ SOFTWARE.
 #ifndef AVLTREE_H
 #define AVLTREE_H
 
-// Define AVLTree
 template<typename ValType>
-class AVLTree {
- protected:
-  // AVLTree constructor
+class Set;
+
+
+// Define AVLTree
+template <typename ValType> class AVLTree {
+  friend class Set<ValType>;
+private:
   AVLTree();
+  // AVLTree constructor
   // insert a node
-  Node<ValType> *insert_node(Node<ValType> *, ValType);
+  Node<ValType> *InsertNode(Node<ValType> *, ValType);
   // delete a node
   Node<ValType> *EraseNode(Node<ValType> *, ValType);
   // Single righr rotation
-  Node<ValType> *single_right_rotation(Node<ValType> *);
+  Node<ValType> *SingleRightRotation(Node<ValType> *);
   // single left rotation
-  Node<ValType> *single_left_rotation(Node<ValType> *);
+  Node<ValType> *SingleLeftRotation(Node<ValType> *);
   // double right rotation
-  Node<ValType> *double_right_rotation(Node<ValType> *);
+  Node<ValType> *DoubleRightRotation(Node<ValType> *);
   // double left rotation
-  Node<ValType> *double_left_rotation(Node<ValType> *);
-  // check if AVL tree is balanced
-  bool is_balanced(Node<ValType> *, Node<ValType> *);
-  // Find node matcheds a key
-  Node<ValType> *find_node(Node<ValType> *, ValType);
-  // set height of a given node
-  void set_height(Node<ValType> *, int);
-  // get height of a given node
-  int get_height(Node<ValType> *);
-  // get Size of subtree
-  int GetSize(Node<ValType> *);
-  // find a node which has a smallest key in subtree whose root is a give node.
-  Node<ValType> *FindMinNodeOfSubtree(Node<ValType> *);
-  // find a node which has a biggest key in subtree whose root is a give node.
-  Node<ValType> *FindMaxNodeOfSubtree(Node<ValType> *);
+  Node<ValType> *DoubleLeftRotation(Node<ValType> *);
   // get Balance of a given node for erase
   int GetBalance(Node<ValType> *);
   // get Rank of a given node
   int FindRank(Node<ValType> *, ValType);
+  // Find node matcheds a key
+  Node<ValType> *FindNode(Node<ValType> *, ValType);
+  // find a node which has a smallest key in subtree whose root is a give node.
+  Node<ValType> *FindMinNodeOfSubtree(Node<ValType> *);
+  // find a node which has a biggest key in subtree whose root is a give node.
+  Node<ValType> *FindMaxNodeOfSubtree(Node<ValType> *);
   // get Depth of a given node
-  int FindDepth(ValType, Node<ValType> *, int);
+  int FindDepth(Node<ValType> *, ValType, int);
+  // check if AVL tree is balanced
+  bool IsBalanced(Node<ValType> *, Node<ValType> *);
+  // set height of a given node
+  void SetHeight(Node<ValType> *, int);
+  // get height of a given node
+  int GetHeight(Node<ValType> *);
+  // get Size of subtree
+  int GetSize(Node<ValType> *);
 
- protected:
+  private:
   // members
   Node<ValType> *root_;
   size_t num_of_nodes_;
