@@ -41,19 +41,20 @@ Node<ValType>::Node(ValType key) {
 
 /* setters & getters */
 template<typename ValType>
-void Node<ValType>::set_key(ValType key) {
+void Node<ValType>::SetKey(ValType key) {
   this->key_ = key;
 }
 
 template<typename ValType>
-ValType Node<ValType>::get_key() { return key_; }
+ValType Node<ValType>::GetKey() { return key_; }
 
 template<typename ValType>
-void Node<ValType>::set_height(int height) {
+void Node<ValType>::SetHeight(int height) {
   this->height_ = height;
 }
 
 template<typename ValType>
-int Node<ValType>::get_height() { return height_; }
+int Node<ValType>::GetHeight() { return height_; }
 
 template <typename ValType> class Node;
+template class Node<int>;

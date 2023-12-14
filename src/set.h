@@ -1,6 +1,6 @@
 /*
-File: node.h
-Copyright (c) 2023 김기정
+File: avl_tree.cpp
+Copyright (c) 2023 김기정, 변해광
 
 MIT License
 
@@ -21,40 +21,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef NODE_H
-#define NODE_H
+#include "avl_tree.h"
 
-template<typename ValType>
-class Set;
+#ifndef SET_H
+#define SET_H
 
-template<typename ValType>
-class AVLTree;
+// define set as user interface
+template <typename ValType> class Set {
+public:
+  Set() {}
+  // inset node with a given key
+  void Insert(ValType);
+  // erase node matches a given key
+  int Erase(ValType);
+  // get minimum key of subtree whose key matches a given key
+  int GetMinKey(ValType);
+  // get maximum key of subtree whose key matches a given key
+  int GetMaxKey(ValType);
+  // check if bst is empty
+  bool IsEmpty();
+  // get the number of nodes in bst
+  int GetSize();
+  // get depth of node matches a given key
+  int GetDepth(ValType);
+  // get rank of node matches a given key
+  int GetRank(ValType);
 
-
-// define Node
-template<typename ValType>
-class Node {
-  friend class AVLTree<ValType>;
-  friend class Set<ValType>;
-
- private:
-  // members
-  ValType key_;
-  Node *left_;
-  Node *right_;
-  int height_;
-  int size_;
-
-  // Node constructors
-  Node();
-  Node(ValType);
-  // get key member
-  ValType GetKey();
-  // set key member
-  void SetKey(ValType);
-  // get height member
-  int GetHeight();
-  // set height member
-  void SetHeight(int);
+private:
+  AVLTree<ValType> bst_;
 };
 #endif
