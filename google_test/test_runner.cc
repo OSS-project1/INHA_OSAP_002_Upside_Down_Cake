@@ -33,6 +33,9 @@ public:
     for (int i = 0; i < 13; i++) {
       avl.root_ = avl.insert_node(avl.root_, arr[i]);
     }
+    for(int i = 0; i < cnt; i++){
+      avl.root_ = avl.EraseNode(avl.root_, erases[i]);
+    }
   }
   static int cnt;
 
@@ -46,15 +49,16 @@ class AVLTreeWithParam
     : public AVLTreeTest,
       public testing::WithParamInterface<std::pair<int, int>> {};
 
+
+
 INSTANTIATE_TEST_SUITE_P(
     Default, AVLTreeWithParam,
-    ::testing::Values(std::make_pair(50, 6), std::make_pair(40, 4),
-                      std::make_pair(60, 10), std::make_pair(27, 2),
-                      std::make_pair(45, 5), std::make_pair(55, 8),
-                      std::make_pair(70, 12), std::make_pair(25, 1),
-                      std::make_pair(30, 3), std::make_pair(51, 7),
-                      std::make_pair(57, 9), std::make_pair(67, 11),
-                      std::make_pair(75, 13)));
+    ::testing::Values(std::make_pair(50, 6), std::make_pair(51, 7),
+                      std::make_pair(55, 8), std::make_pair(57, 9),
+                      std::make_pair(60, 10), std::make_pair(67, 11),
+                      std::make_pair(40, 4), std::make_pair(45, 5),
+                      std::make_pair(70, 12), std::make_pair(27, 2),
+                      std::make_pair(30, 3), std::make_pair(75, 13)));
 
 TEST_P(AVLTreeWithParam, FindRank) {
   std::pair<int, int> param = GetParam();
