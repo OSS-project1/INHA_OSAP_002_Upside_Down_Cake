@@ -48,25 +48,25 @@ class AVLTreeWithParam
 
 INSTANTIATE_TEST_SUITE_P(
     Default, AVLTreeWithParam,
-    ::testing::Values(std::make_pair(50, 75), std::make_pair(40, 45),
-                      std::make_pair(60, 75), std::make_pair(27, 30),
-                      std::make_pair(45, 45), std::make_pair(55, 57),
-                      std::make_pair(70, 75), std::make_pair(25, 25),
-                      std::make_pair(30, 30), std::make_pair(51, 51),
-                      std::make_pair(57, 57), std::make_pair(67, 67),
-                      std::make_pair(75, 75)));
+    ::testing::Values(std::make_pair(50, 6), std::make_pair(40, 4),
+                      std::make_pair(60, 10), std::make_pair(27, 2),
+                      std::make_pair(45, 5), std::make_pair(55, 8),
+                      std::make_pair(70, 12), std::make_pair(25, 1),
+                      std::make_pair(30, 3), std::make_pair(51, 7),
+                      std::make_pair(57, 9), std::make_pair(67, 11),
+                      std::make_pair(75, 13)));
 
-TEST_P(AVLTreeWithParam, FindMinNodeOfSubtree) {
+TEST_P(AVLTreeWithParam, FindRank) {
   std::pair<int, int> param = GetParam();
   int key = param.first;
   int expected_key = param.second;
 
   EXPECT_NE(avl.root_, nullptr);
-  Node<int>* cur_node = avl.FindMaxNodeOfSubtree(avl.find_node(avl.root_, key));
-  EXPECT_EQ(expected_key, cur_node->key_)
-      << "after call of FindMaxNodeOfSubtree with a given key: " << key
-      << ", a returned node must have a key: " << expected_key << ". but it was "
-      << cur_node->key_ << '\n';
+  int rank = avl.FindRank(avl.root_, key);
+  EXPECT_EQ(expected_key, rank)
+      << "after call of FindRank with a given key: " << key
+      << ", a returned rank must have a key: " << expected_key << ". but it was "
+      << rank << '\n';
 }
 
 int main(int argc, char **argv) {
