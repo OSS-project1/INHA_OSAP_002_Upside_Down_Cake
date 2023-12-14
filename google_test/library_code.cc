@@ -222,5 +222,84 @@ Node<ValType> *AVLTree<ValType>::FindMinNodeOfSubtree(Node<ValType> *cur_node) {
   }
 }
 
+// Deletes a node from the AVL tree
+template<typename ValType>
+Node<ValType> *AVLTree<ValType>::EraseNode(Node<ValType> *cur_node, ValType key) {
+  // If the element is not found, return NULL
+  if (cur_node == NULL) {
+	return NULL;
+  }
+
+	// If the key is smaller than the node's key, go to the left child
+  else if (key < cur_node->key_) {
+	cur_node->left_ = EraseNode(cur_node->left_, key);
+  }
+	// If the key is greater than the node's key, go to the right child
+  else if (key > cur_node->key_) {
+	cur_node->right_ = EraseNode(cur_node->right_, key);
+  }
+
+	// When the key is found and the node has two children
+  else if (cur_node->right_ && cur_node->left_) {
+	Node<ValType> *temp = FindMinNodeOfSubtree(cur_node->right_);
+	cur_node->key_ = temp->key_;
+	cur_node->right_ = EraseNode(cur_node->right_, cur_node->key_);
+  }
+
+	// When the key is found and the node has one or zero child
+  else {
+	Node<ValType> *temp = cur_node;
+	if (cur_node->left_ == NULL) {
+	  cur_node = cur_node->right_;
+	} else if (cur_node->right_ == NULL) {
+	  cur_node = cur_node->left_;
+	}
+	free(temp);
+  }
+
+  // If the current node is NULL after deletion, return NULL
+  if (cur_node == NULL) {
+	return NULL;
+  }
+
+  // Update the height and size of the current node
+  set_height(cur_node, 3);
+  // Get the balance factor of the current node to check whether
+  // this node became unbalanced
+  int balance = GetBalance(cur_node);
+
+  // If this node becomes unbalanced, then there are 4 cases
+
+  // Left-Left Case
+  if (balance > 1 && GetBalance(cur_node->left_) >= 0) {
+	return single_right_rotation(cur_node);
+  }
+
+	// Left-Right Case
+  else if (balance > 1 && GetBalance(cur_node->left_) < 0) {
+	return double_right_rotation(cur_node);
+  }
+
+	// Right-Right Case
+  else if (balance < -1 && GetBalance(cur_node->right_) <= 0) {
+	return single_left_rotation(cur_node);
+  }
+
+	// Right-Left Case
+  else if (balance < -1 && GetBalance(cur_node->right_) > 0) {
+	return double_left_rotation(cur_node);
+  }
+
+  return cur_node;
+}
+
+// get Balance of a given node for erase
+template<typename ValType>
+int AVLTree<ValType>::GetBalance(Node<ValType> *cur_node) {
+  if (cur_node == NULL)
+	return 0;
+  return get_height(cur_node->left_) - get_height(cur_node->right_);
+}
+
 template class AVLTree<int>;
 template class Node<int>;

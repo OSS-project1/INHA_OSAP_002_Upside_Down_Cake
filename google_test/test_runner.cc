@@ -26,12 +26,17 @@ SOFTWARE.
 #include <gtest/gtest.h>
 
 int arr[13] = {50, 40, 30, 60, 70, 45, 25, 27, 55, 57, 51, 75, 67};
+int erases[12]{50, 51, 55, 57, 60, 67, 40, 45, 70, 27, 30, 75};
 class AVLTreeTest : public testing::Test {
 public:
   void SetUp() override {
     for (int i = 0; i < 13; i++) {
       avl.root_ = avl.insert_node(avl.root_, arr[i]);
     }
+    for (int i = 0; i < cnt; i++) {
+      avl.root_ = avl.EraseNode(avl.root_, erases[i]);
+    }
+    cnt++;
   }
   static int cnt;
 
@@ -47,25 +52,24 @@ class AVLTreeWithParam
 
 INSTANTIATE_TEST_SUITE_P(
     Default, AVLTreeWithParam,
-    ::testing::Values(std::make_pair(50, 25), std::make_pair(40, 25),
-                      std::make_pair(30, 30), std::make_pair(60, 51),
-                      std::make_pair(70, 67), std::make_pair(45, 45),
-                      std::make_pair(25, 25), std::make_pair(27, 25),
-                      std::make_pair(55, 51), std::make_pair(57, 57),
-                      std::make_pair(51, 51), std::make_pair(75, 75),
-                      std::make_pair(67, 67)));
+    ::testing::Values(std::make_pair(50, 51), std::make_pair(51, 55),
+                      std::make_pair(55, 57), std::make_pair(57, 60),
+                      std::make_pair(60, 67), std::make_pair(67, 40),
+                      std::make_pair(40, 45), std::make_pair(45, 70),
+                      std::make_pair(70, 27), std::make_pair(27, 30),
+                      std::make_pair(30, 75), std::make_pair(75, 25)));
 
 TEST_P(AVLTreeWithParam, FindMinNodeOfSubtree) {
   std::pair<int, int> param = GetParam();
   int key = param.first;
   int expected_key = param.second;
 
-  ASSERT_NE(avl.root_, nullptr);
-  Node<int> *node = avl.FindMinNodeOfSubtree(avl.find_node(avl.root_, key));
-  EXPECT_EQ(expected_key, node->get_key())
-      << "after FindMinNodeOfSubtree call with key: " << key
-      << ", expected minimun key must be: " << expected_key << ". but it was "
-      << node->get_key() << '\n';
+  EXPECT_NE(avl.root_, nullptr);
+  avl.root_ = avl.EraseNode(avl.root_, key);
+  EXPECT_EQ(expected_key, avl.root_->key_)
+      << "after call of EraseNode with a given key: " << key
+      << ", a root must have a key: " << expected_key << ". but it was "
+      << avl.root_->key_ << '\n';
 }
 
 int main(int argc, char **argv) {
