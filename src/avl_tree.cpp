@@ -40,7 +40,9 @@ AVLTree<ValType>::single_right_rotation(Node<ValType> *cur_node) {
   cur_node->left_ = left_child->right_;
   left_child->right_ = cur_node;
   set_height(cur_node, 3);
+  cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
   set_height(left_child, 1);
+  left_child->size_ = GetSize(left_child->left_) + cur_node->size_ + 1;
   return left_child;
 }
 
@@ -53,7 +55,9 @@ Node<ValType> *AVLTree<ValType>::single_left_rotation(Node<ValType> *cur_node) {
   cur_node->right_ = right_child->left_;
   right_child->left_ = cur_node;
   set_height(cur_node, 3);
+  cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
   set_height(right_child, 2);
+  right_child->size_ = GetSize(right_child->right_) + cur_node->size_ + 1;
   return right_child;
 }
 
@@ -142,6 +146,16 @@ int AVLTree<ValType>::get_height(Node<ValType> *cur_node) {
   }
 }
 
+// get Size of subtree
+template<typename ValType>
+int AVLTree<ValType>::GetSize(Node<ValType> *cur_node) {
+  if (cur_node == NULL) {
+	return 0;
+  } else {
+	return cur_node->size_;
+  }
+}
+
 /* find a node which has a smallest key in subtree whose root is a give node. */
 template<typename ValType>
 Node<ValType> *AVLTree<ValType>::FindMinNodeOfSubtree(Node<ValType> *cur_node) {
@@ -173,6 +187,17 @@ int AVLTree<ValType>::GetBalance(Node<ValType> *cur_node) {
   return get_height(cur_node->left_) - get_height(cur_node->right_);
 }
 
+// get Rank of a given node
+template<typename ValType>
+int AVLTree<ValType>::FindRank(Node<ValType> *cur_node, ValType key) {
+  if (cur_node == NULL) {
+	return 0;
+  } else if (cur_node->key_ > key) {
+	return FindRank(cur_node->left_, key);
+  } else {
+	return GetSize(cur_node->left_) + FindRank(cur_node->right_, key) + 1;
+  }
+}
 
 template <typename ValType> class AVLTree;
 template <typename ValType> class Node;

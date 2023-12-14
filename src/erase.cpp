@@ -1,6 +1,6 @@
 /*
 File: insert.cpp
-Copyright (c) 2023 변해광, 전성근
+Copyright (c) 2023 변해광
 
 MIT License
 
@@ -64,6 +64,8 @@ Node<ValType> *AVLTree<ValType>::EraseNode(Node<ValType> *cur_node, ValType key)
 
   // Update the height and size of the current node
   set_height(cur_node, 3);
+  cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
+
   // Get the balance factor of the current node to check whether
   // this node became unbalanced
   int balance = GetBalance(cur_node);

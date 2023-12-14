@@ -1,6 +1,6 @@
 /*
 File: avl_tree.h
-Copyright (c) 2023 김기정
+Copyright (c) 2023 김기정, 변해광
 
 MIT License
 
@@ -52,12 +52,16 @@ class AVLTree {
   void set_height(Node<ValType> *, int);
   // get height of a given node
   int get_height(Node<ValType> *);
+  // get Size of subtree
+  int GetSize(Node<ValType> *);
   // find a node which has a smallest key in subtree whose root is a give node.
   Node<ValType> *FindMinNodeOfSubtree(Node<ValType> *);
   // find a node which has a biggest key in subtree whose root is a give node.
   Node<ValType> *FindMaxNodeOfSubtree(Node<ValType> *);
   // get Balance of a given node for erase
   int GetBalance(Node<ValType> *);
+  // get Rank of a given node
+  int FindRank(Node<ValType> *, ValType);
 
  protected:
   // members

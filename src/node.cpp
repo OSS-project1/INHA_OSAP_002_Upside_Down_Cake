@@ -29,12 +29,14 @@ Node<ValType>::Node() {
   key_ = -1;
   left_ = right_ = NULL;
   height_ = 0;
+  size_ = 1;
 }
 template<typename ValType>
 Node<ValType>::Node(ValType key) {
   key_ = key;
   left_ = right_ = NULL;
   height_ = 0;
+  size_ = 1;
 }
 
 /* setters & getters */
