@@ -62,6 +62,8 @@ class AVLTree {
   int GetBalance(Node<ValType> *);
   // get Rank of a given node
   int FindRank(Node<ValType> *, ValType);
+  // get Depth of a given node
+  int FindDepth(ValType, Node<ValType> *, int);
 
  protected:
   // members
