@@ -199,5 +199,21 @@ int AVLTree<ValType>::FindRank(Node<ValType> *cur_node, ValType key) {
   }
 }
 
+// get Depth of a given node
+template<typename ValType>
+int AVLTree<ValType>::FindDepth(ValType key, Node<ValType> *cur_node, int depth) {
+  if (cur_node == NULL) {
+	return 0;
+  } else if (cur_node->key_ == key) {
+	return depth;
+  } else if (cur_node->left_ != NULL && cur_node->key_ > key) {
+	return FindDepth(key, cur_node->left_, depth + 1);
+  } else if (cur_node->right_ != NULL && cur_node->key_ < key) {
+	return FindDepth(key, cur_node->right_, depth + 1);
+  } else {
+	return 0;
+  }
+}
+
 template <typename ValType> class AVLTree;
 template <typename ValType> class Node;
