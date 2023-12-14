@@ -86,6 +86,8 @@ public:
   int GetSize(Node<ValType> *);
   // get Rank of a given node
   int FindRank(Node<ValType> *, ValType);
+  // get Depth of a given node
+  int FindDepth(Node<ValType> *, ValType, int);
 
 public:
   // members
