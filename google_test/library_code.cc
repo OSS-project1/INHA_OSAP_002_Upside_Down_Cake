@@ -301,5 +301,17 @@ int AVLTree<ValType>::GetBalance(Node<ValType> *cur_node) {
   return get_height(cur_node->left_) - get_height(cur_node->right_);
 }
 
+/* find a node which has a biggest key in subtree whose root is a give node. */
+template<typename ValType>
+Node<ValType> *AVLTree<ValType>::FindMaxNodeOfSubtree(Node<ValType> *cur_node) {
+  if (cur_node == NULL) {
+	return NULL;
+  } else if (cur_node->right_ == NULL) {
+	return cur_node;
+  } else {
+	return FindMaxNodeOfSubtree(cur_node->right_);
+  }
+}
+
 template class AVLTree<int>;
 template class Node<int>;

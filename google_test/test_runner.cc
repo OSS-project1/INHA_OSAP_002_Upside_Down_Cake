@@ -33,10 +33,6 @@ public:
     for (int i = 0; i < 13; i++) {
       avl.root_ = avl.insert_node(avl.root_, arr[i]);
     }
-    for (int i = 0; i < cnt; i++) {
-      avl.root_ = avl.EraseNode(avl.root_, erases[i]);
-    }
-    cnt++;
   }
   static int cnt;
 
@@ -52,12 +48,13 @@ class AVLTreeWithParam
 
 INSTANTIATE_TEST_SUITE_P(
     Default, AVLTreeWithParam,
-    ::testing::Values(std::make_pair(50, 51), std::make_pair(51, 55),
-                      std::make_pair(55, 57), std::make_pair(57, 60),
-                      std::make_pair(60, 67), std::make_pair(67, 40),
-                      std::make_pair(40, 45), std::make_pair(45, 70),
-                      std::make_pair(70, 27), std::make_pair(27, 30),
-                      std::make_pair(30, 75), std::make_pair(75, 25)));
+    ::testing::Values(std::make_pair(50, 75), std::make_pair(40, 45),
+                      std::make_pair(60, 75), std::make_pair(27, 30),
+                      std::make_pair(45, 45), std::make_pair(55, 57),
+                      std::make_pair(70, 75), std::make_pair(25, 25),
+                      std::make_pair(30, 30), std::make_pair(51, 51),
+                      std::make_pair(57, 57), std::make_pair(67, 67),
+                      std::make_pair(75, 75)));
 
 TEST_P(AVLTreeWithParam, FindMinNodeOfSubtree) {
   std::pair<int, int> param = GetParam();
@@ -65,11 +62,11 @@ TEST_P(AVLTreeWithParam, FindMinNodeOfSubtree) {
   int expected_key = param.second;
 
   EXPECT_NE(avl.root_, nullptr);
-  avl.root_ = avl.EraseNode(avl.root_, key);
-  EXPECT_EQ(expected_key, avl.root_->key_)
-      << "after call of EraseNode with a given key: " << key
-      << ", a root must have a key: " << expected_key << ". but it was "
-      << avl.root_->key_ << '\n';
+  Node<int>* cur_node = avl.FindMaxNodeOfSubtree(avl.find_node(avl.root_, key));
+  EXPECT_EQ(expected_key, cur_node->key_)
+      << "after call of FindMaxNodeOfSubtree with a given key: " << key
+      << ", a returned node must have a key: " << expected_key << ". but it was "
+      << cur_node->key_ << '\n';
 }
 
 int main(int argc, char **argv) {
