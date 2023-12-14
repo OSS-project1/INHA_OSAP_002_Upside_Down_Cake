@@ -165,12 +165,12 @@ int AVLTree<ValType>::get_height(Node<ValType> *cur_node) {
 }
 
 // get Size of subtree
-template<typename ValType>
+template <typename ValType>
 int AVLTree<ValType>::GetSize(Node<ValType> *cur_node) {
   if (cur_node == NULL) {
-	return 0;
+    return 0;
   } else {
-	return cur_node->size_;
+    return cur_node->size_;
   }
 }
 
@@ -240,43 +240,44 @@ Node<ValType> *AVLTree<ValType>::FindMinNodeOfSubtree(Node<ValType> *cur_node) {
 }
 
 // Deletes a node from the AVL tree
-template<typename ValType>
-Node<ValType> *AVLTree<ValType>::EraseNode(Node<ValType> *cur_node, ValType key) {
+template <typename ValType>
+Node<ValType> *AVLTree<ValType>::EraseNode(Node<ValType> *cur_node,
+                                           ValType key) {
   // If the element is not found, return NULL
   if (cur_node == NULL) {
-	return NULL;
+    return NULL;
   }
 
-	// If the key is smaller than the node's key, go to the left child
+  // If the key is smaller than the node's key, go to the left child
   else if (key < cur_node->key_) {
-	cur_node->left_ = EraseNode(cur_node->left_, key);
+    cur_node->left_ = EraseNode(cur_node->left_, key);
   }
-	// If the key is greater than the node's key, go to the right child
+  // If the key is greater than the node's key, go to the right child
   else if (key > cur_node->key_) {
-	cur_node->right_ = EraseNode(cur_node->right_, key);
+    cur_node->right_ = EraseNode(cur_node->right_, key);
   }
 
-	// When the key is found and the node has two children
+  // When the key is found and the node has two children
   else if (cur_node->right_ && cur_node->left_) {
-	Node<ValType> *temp = FindMinNodeOfSubtree(cur_node->right_);
-	cur_node->key_ = temp->key_;
-	cur_node->right_ = EraseNode(cur_node->right_, cur_node->key_);
+    Node<ValType> *temp = FindMinNodeOfSubtree(cur_node->right_);
+    cur_node->key_ = temp->key_;
+    cur_node->right_ = EraseNode(cur_node->right_, cur_node->key_);
   }
 
-	// When the key is found and the node has one or zero child
+  // When the key is found and the node has one or zero child
   else {
-	Node<ValType> *temp = cur_node;
-	if (cur_node->left_ == NULL) {
-	  cur_node = cur_node->right_;
-	} else if (cur_node->right_ == NULL) {
-	  cur_node = cur_node->left_;
-	}
-	free(temp);
+    Node<ValType> *temp = cur_node;
+    if (cur_node->left_ == NULL) {
+      cur_node = cur_node->right_;
+    } else if (cur_node->right_ == NULL) {
+      cur_node = cur_node->left_;
+    }
+    free(temp);
   }
 
   // If the current node is NULL after deletion, return NULL
   if (cur_node == NULL) {
-	return NULL;
+    return NULL;
   }
 
   // Update the height and size of the current node
@@ -290,57 +291,72 @@ Node<ValType> *AVLTree<ValType>::EraseNode(Node<ValType> *cur_node, ValType key)
 
   // Left-Left Case
   if (balance > 1 && GetBalance(cur_node->left_) >= 0) {
-	return single_right_rotation(cur_node);
+    return single_right_rotation(cur_node);
   }
 
-	// Left-Right Case
+  // Left-Right Case
   else if (balance > 1 && GetBalance(cur_node->left_) < 0) {
-	return double_right_rotation(cur_node);
+    return double_right_rotation(cur_node);
   }
 
-	// Right-Right Case
+  // Right-Right Case
   else if (balance < -1 && GetBalance(cur_node->right_) <= 0) {
-	return single_left_rotation(cur_node);
+    return single_left_rotation(cur_node);
   }
 
-	// Right-Left Case
+  // Right-Left Case
   else if (balance < -1 && GetBalance(cur_node->right_) > 0) {
-	return double_left_rotation(cur_node);
+    return double_left_rotation(cur_node);
   }
 
   return cur_node;
 }
 
 // get Balance of a given node for erase
-template<typename ValType>
+template <typename ValType>
 int AVLTree<ValType>::GetBalance(Node<ValType> *cur_node) {
   if (cur_node == NULL)
-	return 0;
+    return 0;
   return get_height(cur_node->left_) - get_height(cur_node->right_);
 }
 
 /* find a node which has a biggest key in subtree whose root is a give node. */
-template<typename ValType>
+template <typename ValType>
 Node<ValType> *AVLTree<ValType>::FindMaxNodeOfSubtree(Node<ValType> *cur_node) {
   if (cur_node == NULL) {
-	return NULL;
+    return NULL;
   } else if (cur_node->right_ == NULL) {
-	return cur_node;
+    return cur_node;
   } else {
-	return FindMaxNodeOfSubtree(cur_node->right_);
+    return FindMaxNodeOfSubtree(cur_node->right_);
   }
 }
 // get Rank of a given node
-template<typename ValType>
+template <typename ValType>
 int AVLTree<ValType>::FindRank(Node<ValType> *cur_node, ValType key) {
   if (cur_node == NULL) {
-	return 0;
+    return 0;
   } else if (cur_node->key_ > key) {
-	return FindRank(cur_node->left_, key);
+    return FindRank(cur_node->left_, key);
   } else {
-	return GetSize(cur_node->left_) + FindRank(cur_node->right_, key) + 1;
+    return GetSize(cur_node->left_) + FindRank(cur_node->right_, key) + 1;
   }
 }
-
+// get Depth of a given node
+template <typename ValType>
+int AVLTree<ValType>::FindDepth(Node<ValType> *cur_node, ValType key,
+                                int depth) {
+  if (cur_node == NULL) {
+    return 0;
+  } else if (cur_node->key_ == key) {
+    return depth;
+  } else if (cur_node->left_ != NULL && cur_node->key_ > key) {
+    return FindDepth(cur_node->left_, key, depth + 1);
+  } else if (cur_node->right_ != NULL && cur_node->key_ < key) {
+    return FindDepth(cur_node->right_, key, depth + 1);
+  } else {
+    return 0;
+  }
+}
 template class AVLTree<int>;
 template class Node<int>;

@@ -33,9 +33,6 @@ public:
     for (int i = 0; i < 13; i++) {
       avl.root_ = avl.insert_node(avl.root_, arr[i]);
     }
-    for(int i = 0; i < cnt; i++){
-      avl.root_ = avl.EraseNode(avl.root_, erases[i]);
-    }
   }
   static int cnt;
 
@@ -49,28 +46,26 @@ class AVLTreeWithParam
     : public AVLTreeTest,
       public testing::WithParamInterface<std::pair<int, int>> {};
 
-
-
 INSTANTIATE_TEST_SUITE_P(
     Default, AVLTreeWithParam,
-    ::testing::Values(std::make_pair(50, 6), std::make_pair(51, 7),
-                      std::make_pair(55, 8), std::make_pair(57, 9),
-                      std::make_pair(60, 10), std::make_pair(67, 11),
-                      std::make_pair(40, 4), std::make_pair(45, 5),
-                      std::make_pair(70, 12), std::make_pair(27, 2),
-                      std::make_pair(30, 3), std::make_pair(75, 13)));
+    ::testing::Values(std::make_pair(50, 0), std::make_pair(51, 3),
+                      std::make_pair(55, 2), std::make_pair(57, 3),
+                      std::make_pair(60, 1), std::make_pair(67, 3),
+                      std::make_pair(40, 1), std::make_pair(45, 2),
+                      std::make_pair(70, 2), std::make_pair(27, 2),
+                      std::make_pair(30, 3), std::make_pair(75, 3)));
 
-TEST_P(AVLTreeWithParam, FindRank) {
+TEST_P(AVLTreeWithParam, FindDepth) {
   std::pair<int, int> param = GetParam();
   int key = param.first;
   int expected_key = param.second;
 
   EXPECT_NE(avl.root_, nullptr);
-  int rank = avl.FindRank(avl.root_, key);
-  EXPECT_EQ(expected_key, rank)
-      << "after call of FindRank with a given key: " << key
-      << ", a returned rank must have a key: " << expected_key << ". but it was "
-      << rank << '\n';
+  int depth = avl.FindDepth(avl.root_, key, 0);
+  EXPECT_EQ(expected_key, depth)
+      << "after call of FindDepth with a given key: " << key
+      << ", a returned depth must have a key: " << expected_key
+      << ". but it was " << depth << '\n';
 }
 
 int main(int argc, char **argv) {

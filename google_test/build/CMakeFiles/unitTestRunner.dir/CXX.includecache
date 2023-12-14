@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/whatsgood/oss/google_test/library_code.h
+/home/whatsgood/tmp/INHA_OSAP_002_Upside_Down_Cake/google_test/library_code.h
 iostream
 -
 
-/home/whatsgood/oss/google_test/test_runner.cc
+/home/whatsgood/tmp/INHA_OSAP_002_Upside_Down_Cake/google_test/test_runner.cc
 library_code.h
-/home/whatsgood/oss/google_test/library_code.h
+/home/whatsgood/tmp/INHA_OSAP_002_Upside_Down_Cake/google_test/library_code.h
 gtest/gtest-param-test.h
 -
 gtest/gtest.h

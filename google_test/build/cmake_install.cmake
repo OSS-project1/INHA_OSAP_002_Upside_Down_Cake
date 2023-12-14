@@ -1,4 +1,4 @@
-# Install script for directory: /home/whatsgood/oss/google_test
+# Install script for directory: /home/whatsgood/tmp/INHA_OSAP_002_Upside_Down_Cake/google_test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/whatsgood/oss/google_test/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/whatsgood/tmp/INHA_OSAP_002_Upside_Down_Cake/google_test/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
