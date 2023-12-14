@@ -108,8 +108,8 @@ children argument
   1: compare left child to calling node's height
 */
 template<typename ValType>
-void AVLTree<ValType>::set_height(Node<ValType> *cur_node, int chidren) {
-  switch (chidren) {
+void AVLTree<ValType>::set_height(Node<ValType> *cur_node, int children) {
+  switch (children) {
 	case 3:
 	  if (get_height(cur_node->left_) > get_height(cur_node->right_)) {
 		cur_node->set_height(get_height(cur_node->left_) + 1);
@@ -153,8 +153,14 @@ Node<ValType> *AVLTree<ValType>::FindMinNodeOfSubtree(Node<ValType> *cur_node) {
 	return FindMinNodeOfSubtree(cur_node->left_);
   }
 }
+// get Balance of a given node for erase
+template<typename ValType>
+int AVLTree<ValType>::GetBalance(Node<ValType> *cur_node) {
+  if (cur_node == NULL)
+	return 0;
+  return get_height(cur_node->left_) - get_height(cur_node->right_);
+}
 
-template<typename ValType>
-class AVLTree;
-template<typename ValType>
-class Node;
+
+template <typename ValType> class AVLTree;
+template <typename ValType> class Node;

@@ -54,5 +54,4 @@ void Node<ValType>::set_height(int height) {
 template<typename ValType>
 int Node<ValType>::get_height() { return height_; }
 
-template
-class Node<int>;
+template <typename ValType> class Node;

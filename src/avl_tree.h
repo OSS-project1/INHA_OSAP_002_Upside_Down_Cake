@@ -34,6 +34,8 @@ class AVLTree {
   AVLTree();
   // insert a node
   Node<ValType> *insert_node(Node<ValType> *, ValType);
+  // delete a node
+  Node<ValType> *EraseNode(Node<ValType> *, ValType);
   // Single righr rotation
   Node<ValType> *single_right_rotation(Node<ValType> *);
   // single left rotation
@@ -52,6 +54,8 @@ class AVLTree {
   int get_height(Node<ValType> *);
   // find a node which has a smallest key in subtree whose root is a give node.
   Node<ValType> *FindMinNodeOfSubtree(Node<ValType> *);
+  // get Balance of a given node for erase
+  int GetBalance(Node<ValType> *);
 
  protected:
   // members
