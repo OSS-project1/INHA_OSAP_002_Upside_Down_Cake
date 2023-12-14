@@ -153,6 +153,18 @@ Node<ValType> *AVLTree<ValType>::FindMinNodeOfSubtree(Node<ValType> *cur_node) {
 	return FindMinNodeOfSubtree(cur_node->left_);
   }
 }
+
+/* find a node which has a biggest key in subtree whose root is a give node. */
+template<typename ValType>
+Node<ValType> *AVLTree<ValType>::FindMaxNodeOfSubtree(Node<ValType> *cur_node) {
+  if (cur_node == NULL) {
+	return NULL;
+  } else if (cur_node->right_ == NULL) {
+	return cur_node;
+  } else {
+	return FindMaxNodeOfSubtree(cur_node->right_);
+  }
+}
 // get Balance of a given node for erase
 template<typename ValType>
 int AVLTree<ValType>::GetBalance(Node<ValType> *cur_node) {
