@@ -47,25 +47,25 @@ class AVLTreeWithParam
 
 INSTANTIATE_TEST_SUITE_P(
     Default, AVLTreeWithParam,
-    ::testing::Values(std::make_pair(50, 3), std::make_pair(40, 2),
-                      std::make_pair(30, 0), std::make_pair(60, 2),
-                      std::make_pair(70, 1), std::make_pair(45, 0),
-                      std::make_pair(25, 0), std::make_pair(27, 1),
-                      std::make_pair(55, 1), std::make_pair(57, 0),
-                      std::make_pair(51, 0), std::make_pair(75, 0),
-                      std::make_pair(67, 0)));
+    ::testing::Values(std::make_pair(50, 25), std::make_pair(40, 25),
+                      std::make_pair(30, 30), std::make_pair(60, 51),
+                      std::make_pair(70, 67), std::make_pair(45, 45),
+                      std::make_pair(25, 25), std::make_pair(27, 25),
+                      std::make_pair(55, 51), std::make_pair(57, 57),
+                      std::make_pair(51, 51), std::make_pair(75, 75),
+                      std::make_pair(67, 67)));
 
-TEST_P(AVLTreeWithParam, get_height) {
+TEST_P(AVLTreeWithParam, FindMinNodeOfSubtree) {
   std::pair<int, int> param = GetParam();
   int key = param.first;
   int expected_key = param.second;
 
   ASSERT_NE(avl.root_, nullptr);
-  Node<int> *node = avl.find_node(avl.root_, key);
-  EXPECT_EQ(expected_key, node->get_height())
-      << "after insert nodes, a height of a given key: " << key
-      << " has to follow avl tree structure, expected key: " << expected_key
-      << '\n';
+  Node<int> *node = avl.FindMinNodeOfSubtree(avl.find_node(avl.root_, key));
+  EXPECT_EQ(expected_key, node->get_key())
+      << "after FindMinNodeOfSubtree call with key: " << key
+      << ", expected minimun key must be: " << expected_key << ". but it was "
+      << node->get_key() << '\n';
 }
 
 int main(int argc, char **argv) {

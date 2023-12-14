@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/whatsgood/oss/google_test/library_code.h
+iostream
+-
+
+/home/whatsgood/oss/google_test/test_runner.cc
+library_code.h
+/home/whatsgood/oss/google_test/library_code.h
+gtest/gtest-param-test.h
+-
+gtest/gtest.h
+-
+

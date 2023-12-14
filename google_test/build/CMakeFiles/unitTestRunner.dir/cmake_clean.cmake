@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/unitTestRunner.dir/test_runner.cc.o"
-  "CMakeFiles/unitTestRunner.dir/test_runner.cc.o.d"
   "unitTestRunner"
   "unitTestRunner.pdb"
 )

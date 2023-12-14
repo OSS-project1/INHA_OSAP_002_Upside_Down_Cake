@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/common_library.dir/library_code.cc.o"
-  "CMakeFiles/common_library.dir/library_code.cc.o.d"
   "libcommon_library.a"
   "libcommon_library.pdb"
 )
