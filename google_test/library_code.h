@@ -78,6 +78,8 @@ public:
   bool is_balanced(Node<ValType> *, Node<ValType> *);
   // find a node which has a smallest key in subtree whose root is a give node.
   Node<ValType> *FindMinNodeOfSubtree(Node<ValType> *);
+  // find a node which has a biggest key in subtree whose root is a give node.
+  Node<ValType> *FindMaxNodeOfSubtree(Node<ValType> *);
   // get Balance of a given node for erase
   int GetBalance(Node<ValType> *);
 
