@@ -74,6 +74,8 @@ public:
   int get_height(Node<ValType> *);
   // check if AVL tree is balanced
   bool is_balanced(Node<ValType> *, Node<ValType> *);
+  // find a node which has a smallest key in subtree whose root is a give node.
+  Node<ValType> *FindMinNodeOfSubtree(Node<ValType> *);
 
 public:
   // members

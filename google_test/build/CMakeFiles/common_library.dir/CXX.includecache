@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/whatsgood/oss/google_test/library_code.cc
+library_code.h
+/home/whatsgood/oss/google_test/library_code.h
+iostream
+-
+
+/home/whatsgood/oss/google_test/library_code.h
+iostream
+-
+
