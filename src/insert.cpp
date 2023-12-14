@@ -29,7 +29,7 @@ SOFTWARE.
     2. then, check if tree is balanced at each node this function traversed.
 */
 
-template<typename ValType>
+template <typename ValType>
 Node<ValType> *AVLTree<ValType>::insert_node(Node<ValType> *cur_node,
 											 ValType key) {
 
@@ -68,7 +68,5 @@ Node<ValType> *AVLTree<ValType>::insert_node(Node<ValType> *cur_node,
   return cur_node;
 }
 
-template
-class AVLTree<int>;
-template
-class Node<int>;
+template <typename ValType> class AVLTree;
+template <typename ValType> class Node;
