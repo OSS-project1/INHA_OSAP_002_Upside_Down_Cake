@@ -27,11 +27,13 @@ template <typename ValType> Node<ValType>::Node() {
   key_ = -1;
   left_ = right_ = NULL;
   height_ = 0;
+  size_ = 1;
 }
 template <typename ValType> Node<ValType>::Node(ValType key) {
   key_ = key;
   left_ = right_ = NULL;
   height_ = 0;
+  size_ = 1;
 }
 
 /* setters & getters */
@@ -63,7 +65,9 @@ AVLTree<ValType>::single_right_rotation(Node<ValType> *cur_node) {
   cur_node->left_ = left_child->right_;
   left_child->right_ = cur_node;
   set_height(cur_node, 3);
+  cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
   set_height(left_child, 1);
+  left_child->size_ = GetSize(left_child->left_) + cur_node->size_ + 1;
   return left_child;
 }
 
@@ -76,7 +80,9 @@ Node<ValType> *AVLTree<ValType>::single_left_rotation(Node<ValType> *cur_node) {
   cur_node->right_ = right_child->left_;
   right_child->left_ = cur_node;
   set_height(cur_node, 3);
+  cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
   set_height(right_child, 2);
+  right_child->size_ = GetSize(right_child->right_) + cur_node->size_ + 1;
   return right_child;
 }
 
@@ -158,6 +164,16 @@ int AVLTree<ValType>::get_height(Node<ValType> *cur_node) {
   }
 }
 
+// get Size of subtree
+template<typename ValType>
+int AVLTree<ValType>::GetSize(Node<ValType> *cur_node) {
+  if (cur_node == NULL) {
+	return 0;
+  } else {
+	return cur_node->size_;
+  }
+}
+
 /*
     insert a node storing a given key to AVL tree
     1. this function traverse nodes recursively from root untill it meets
@@ -201,6 +217,7 @@ Node<ValType> *AVLTree<ValType>::insert_node(Node<ValType> *cur_node,
 
   /* set height of current node */
   set_height(cur_node, 3);
+  cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
   return cur_node;
 }
 
@@ -264,6 +281,7 @@ Node<ValType> *AVLTree<ValType>::EraseNode(Node<ValType> *cur_node, ValType key)
 
   // Update the height and size of the current node
   set_height(cur_node, 3);
+  cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
   // Get the balance factor of the current node to check whether
   // this node became unbalanced
   int balance = GetBalance(cur_node);
@@ -310,6 +328,17 @@ Node<ValType> *AVLTree<ValType>::FindMaxNodeOfSubtree(Node<ValType> *cur_node) {
 	return cur_node;
   } else {
 	return FindMaxNodeOfSubtree(cur_node->right_);
+  }
+}
+// get Rank of a given node
+template<typename ValType>
+int AVLTree<ValType>::FindRank(Node<ValType> *cur_node, ValType key) {
+  if (cur_node == NULL) {
+	return 0;
+  } else if (cur_node->key_ > key) {
+	return FindRank(cur_node->left_, key);
+  } else {
+	return GetSize(cur_node->left_) + FindRank(cur_node->right_, key) + 1;
   }
 }
 

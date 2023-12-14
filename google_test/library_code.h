@@ -37,7 +37,7 @@ public:
   Node *left_;
   Node *right_;
   int height_;
-
+  int size_;
   // Node constructors
   Node();
   Node(ValType);
@@ -82,6 +82,10 @@ public:
   Node<ValType> *FindMaxNodeOfSubtree(Node<ValType> *);
   // get Balance of a given node for erase
   int GetBalance(Node<ValType> *);
+  // get Size of subtree
+  int GetSize(Node<ValType> *);
+  // get Rank of a given node
+  int FindRank(Node<ValType> *, ValType);
 
 public:
   // members
