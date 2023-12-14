@@ -39,6 +39,7 @@ class Node {
   Node *left_;
   Node *right_;
   int height_;
+  int size_;
 
   // Node constructors
   Node();

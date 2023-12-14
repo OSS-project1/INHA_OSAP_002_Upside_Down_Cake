@@ -65,6 +65,7 @@ Node<ValType> *AVLTree<ValType>::insert_node(Node<ValType> *cur_node,
 
   /* set height of current node */
   set_height(cur_node, 3);
+  cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
   return cur_node;
 }
 
