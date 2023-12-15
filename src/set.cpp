@@ -45,7 +45,7 @@ template <typename ValType> int Set<ValType>::GetMaxKey(ValType key) {
 template <typename ValType> bool Set<ValType>::IsEmpty() {
   return (bst_.num_of_nodes_ == 0);
 }
-// get the number of nodes in bst
+// get the number of nodes in bst`
 template <typename ValType> int Set<ValType>::GetSize() {
   return bst_.num_of_nodes_;
 }

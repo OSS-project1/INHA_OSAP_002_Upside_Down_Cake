@@ -64,7 +64,7 @@ Node<ValType> *AVLTree<ValType>::EraseNode(Node<ValType> *cur_node,
   }
 
   // Update the height and size of the current node
-  SetHeight(cur_node, 3);
+  SetHeight(cur_node, cur_node->left_, cur_node->right_);
   cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
 
   // Get the balance factor of the current node to check whether

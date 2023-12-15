@@ -24,15 +24,13 @@ SOFTWARE.
 #include <iostream>
 
 /* Node constructors */
-template<typename ValType>
-Node<ValType>::Node() {
+template <typename ValType> Node<ValType>::Node() {
   key_ = -1;
   left_ = right_ = NULL;
   height_ = 0;
   size_ = 1;
 }
-template<typename ValType>
-Node<ValType>::Node(ValType key) {
+template <typename ValType> Node<ValType>::Node(ValType key) {
   key_ = key;
   left_ = right_ = NULL;
   height_ = 0;
@@ -40,20 +38,16 @@ Node<ValType>::Node(ValType key) {
 }
 
 /* setters & getters */
-template<typename ValType>
-void Node<ValType>::SetKey(ValType key) {
+template <typename ValType> void Node<ValType>::SetKey(ValType key) {
   this->key_ = key;
 }
 
-template<typename ValType>
-ValType Node<ValType>::GetKey() { return key_; }
+template <typename ValType> ValType Node<ValType>::GetKey() { return key_; }
 
-template<typename ValType>
-void Node<ValType>::SetHeight(int height) {
+template <typename ValType> void Node<ValType>::SetHeight(int height) {
   this->height_ = height;
 }
 
-template<typename ValType>
-int Node<ValType>::GetHeight() { return height_; }
+template <typename ValType> int Node<ValType>::GetHeight() { return height_; }
 
 template class Node<int>;
