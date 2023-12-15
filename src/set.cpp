@@ -55,7 +55,7 @@ template <typename ValType> int Set<ValType>::GetDepth(ValType key) {
   if (cur_node == NULL) {
     return 0;
   } else {
-    return bst_.FindDepth(bst_.root_, cur_node->key_, 0);
+    return bst_.FindDepth(bst_.root_, key, 0);
   }
 }
 // inset node with a given key
@@ -63,9 +63,10 @@ template <typename ValType> void Set<ValType>::Insert(ValType key) {
   bst_.num_of_nodes_++;
   bst_.root_ = bst_.InsertNode(bst_.root_, key);
 }
+
 // erase node matches a given key
 template <typename ValType> int Set<ValType>::Erase(ValType key) {
-  if (bst_.FindNode(bst_.root_, key)== NULL) {
+  if (bst_.FindNode(bst_.root_, key) == NULL) {
     return 0;
   } else {
     int depth = bst_.FindDepth(bst_.root_, key, 0);

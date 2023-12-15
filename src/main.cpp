@@ -1,7 +1,4 @@
 #include "set.h"
-// #include "avl_tree.cpp"
-// #include "node.cpp"
-// #include "set.cpp"
 #include <iostream>
 using namespace std;
 

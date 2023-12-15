@@ -96,7 +96,5 @@ Node<ValType> *AVLTree<ValType>::EraseNode(Node<ValType> *cur_node,
   return cur_node;
 }
 
-template <typename ValType> class AVLTree;
-template <typename ValType> class Node;
 template class AVLTree<int>;
 template class Node<int>;

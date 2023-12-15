@@ -29,7 +29,7 @@ template <typename ValType> AVLTree<ValType>::AVLTree() {
   num_of_nodes_ = 0;
 }
 
-/* root - left - left */
+//* root - left - left */
 /* when cur_node's left child has bigger height than right child's height and
    inserted node has smaller key than left child's one */
 template <typename ValType>
@@ -39,7 +39,10 @@ Node<ValType> *AVLTree<ValType>::SingleRightRotation(Node<ValType> *cur_node) {
   left_child->right_ = cur_node;
   SetHeight(cur_node, 3);
   cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
-  SetHeight(left_child, 1);
+  left_child->height_ = (GetHeight(left_child->left_) > cur_node->height_
+                             ? GetHeight(left_child->left_)
+                             : cur_node->height_) +
+                        1; //
   left_child->size_ = GetSize(left_child->left_) + cur_node->size_ + 1;
   return left_child;
 }
@@ -54,7 +57,10 @@ Node<ValType> *AVLTree<ValType>::SingleLeftRotation(Node<ValType> *cur_node) {
   right_child->left_ = cur_node;
   SetHeight(cur_node, 3);
   cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
-  SetHeight(right_child, 2);
+  right_child->height_ = (GetHeight(right_child->right_) > cur_node->height_
+                              ? GetHeight(right_child->right_)
+                              : cur_node->height_) +
+                         1; //
   right_child->size_ = GetSize(right_child->right_) + cur_node->size_ + 1;
   return right_child;
 }
@@ -94,10 +100,12 @@ Node<ValType> *AVLTree<ValType>::FindNode(Node<ValType> *cur_node,
     return NULL;
   } else if (cur_node->key_ == key) {
     return cur_node;
-  } else if (cur_node->key_ > key) {
+  } else if (cur_node->left_ != NULL && cur_node->key_ > key) {
     return FindNode(cur_node->left_, key);
-  } else if (cur_node->key_ < key) {
+  } else if (cur_node->right_ != NULL && cur_node->key_ < key) {
     return FindNode(cur_node->right_, key);
+  } else {
+    return NULL;
   }
 }
 
