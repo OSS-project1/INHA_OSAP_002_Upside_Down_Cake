@@ -37,12 +37,9 @@ Node<ValType> *AVLTree<ValType>::SingleRightRotation(Node<ValType> *cur_node) {
   Node<ValType> *left_child = cur_node->left_;
   cur_node->left_ = left_child->right_;
   left_child->right_ = cur_node;
-  SetHeight(cur_node, 3);
+  SetHeight(cur_node, cur_node->left_, cur_node->right_);
   cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
-  left_child->height_ = (GetHeight(left_child->left_) > cur_node->height_
-                             ? GetHeight(left_child->left_)
-                             : cur_node->height_) +
-                        1; //
+  SetHeight(left_child, left_child->left_, cur_node);
   left_child->size_ = GetSize(left_child->left_) + cur_node->size_ + 1;
   return left_child;
 }
@@ -55,12 +52,9 @@ Node<ValType> *AVLTree<ValType>::SingleLeftRotation(Node<ValType> *cur_node) {
   Node<ValType> *right_child = cur_node->right_;
   cur_node->right_ = right_child->left_;
   right_child->left_ = cur_node;
-  SetHeight(cur_node, 3);
+  SetHeight(cur_node, cur_node->left_, cur_node->right_);
   cur_node->size_ = GetSize(cur_node->left_) + GetSize(cur_node->right_) + 1;
-  right_child->height_ = (GetHeight(right_child->right_) > cur_node->height_
-                              ? GetHeight(right_child->right_)
-                              : cur_node->height_) +
-                         1; //
+  SetHeight(right_child, right_child->right_, cur_node);
   right_child->size_ = GetSize(right_child->right_) + cur_node->size_ + 1;
   return right_child;
 }
@@ -109,35 +103,14 @@ Node<ValType> *AVLTree<ValType>::FindNode(Node<ValType> *cur_node,
   }
 }
 
-/*
-set_hegiht based on calling node's childs
-children argument
-  3: compare two children
-  2: compare right child to calling node's height
-  1: compare left child to calling node's height
-*/
+// set height of a given node
 template <typename ValType>
-void AVLTree<ValType>::SetHeight(Node<ValType> *cur_node, int chidren) {
-  switch (chidren) {
-  case 3:
-    if (GetHeight(cur_node->left_) > GetHeight(cur_node->right_)) {
-      cur_node->SetHeight(GetHeight(cur_node->left_) + 1);
-    } else {
-      cur_node->SetHeight(GetHeight(cur_node->right_) + 1);
-    }
-    break;
-  case 2:
-    if (GetHeight(cur_node->right_) > GetHeight(cur_node)) {
-      cur_node->SetHeight(GetHeight(cur_node->right_) + 1);
-    } else {
-      cur_node->SetHeight(GetHeight(cur_node) + 1);
-    }
-  case 1:
-    if (GetHeight(cur_node->left_) > GetHeight(cur_node)) {
-      cur_node->SetHeight(GetHeight(cur_node->left_) + 1);
-    } else {
-      cur_node->SetHeight(GetHeight(cur_node) + 1);
-    }
+void AVLTree<ValType>::SetHeight(Node<ValType> *cur_node, Node<ValType> *left_node, Node<ValType> *right_node) {
+  if(GetHeight(left_node) > GetHeight(right_node)){
+    cur_node->height_ = GetHeight(left_node) + 1;
+  }
+  else {
+    cur_node->height_ = GetHeight(right_node) + 1;
   }
 }
 

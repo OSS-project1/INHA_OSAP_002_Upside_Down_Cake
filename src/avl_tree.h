@@ -26,13 +26,12 @@ SOFTWARE.
 #ifndef AVLTREE_H
 #define AVLTREE_H
 
-template<typename ValType>
-class Set;
-
+template <typename ValType> class Set;
 
 // Define AVLTree
 template <typename ValType> class AVLTree {
   friend class Set<ValType>;
+
 private:
   AVLTree();
   // AVLTree constructor
@@ -63,13 +62,13 @@ private:
   // check if AVL tree is balanced
   bool IsBalanced(Node<ValType> *, Node<ValType> *);
   // set height of a given node
-  void SetHeight(Node<ValType> *, int);
+  void SetHeight(Node<ValType> *, Node<ValType> *, Node<ValType> *);
   // get height of a given node
   int GetHeight(Node<ValType> *);
   // get Size of subtree
   int GetSize(Node<ValType> *);
 
-  private:
+private:
   // members
   Node<ValType> *root_;
   size_t num_of_nodes_;
